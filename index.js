@@ -15,7 +15,6 @@ app.get('/', function (req, res) {
 
 app.get('/users', function (req, res) {
   let sql = 'Select * from Users'
-  logSql(sql);
   connection.query(sql, function (err, result) {
     res.json(result);
   });
@@ -24,7 +23,6 @@ app.get('/users', function (req, res) {
 app.get('/users/:id', function (req, res) {
   let id = req.params.id.toString();
   let sql = 'Select * from Users where id=?';
-  logSql(sql);
   connection.execute(sql,[id], function (err, result) {
     res.json(result);
   });
@@ -32,8 +30,4 @@ app.get('/users/:id', function (req, res) {
 
 app.listen(3000, function () {
   console.log('Example app listening on port 3000!')
-})
-
-function logSql(url) {
-  console.log('Execution de la requête => ' +url)
-}
+});
