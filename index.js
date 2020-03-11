@@ -23,9 +23,9 @@ app.get('/users', function (req, res) {
 
 app.get('/users/:id', function (req, res) {
   let id = req.params.id.toString();
-  let sql = 'Select * from Users where id=' + id;
+  let sql = 'Select * from Users where id=?';
   logSql(sql);
-  connection.query(sql, function (err, result) {
+  connection.execute(sql,[id], function (err, result) {
     res.json(result);
   });
 });
